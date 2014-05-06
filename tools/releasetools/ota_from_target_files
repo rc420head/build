@@ -462,12 +462,18 @@ def WriteFullOTAPackage(input_zip, output_zip):
     script.Unmount("/system")
 
   script.ShowProgress(0.5, 0)
-  script.Print("")
-  script.Print("")
-  script.Print("Slim Roms")
-  script.Print("")
-  script.Print(" www.slimroms.net  ")
-  script.Print("")
+  script.Print("");
+  script.Print("");
+  script.Print("");
+  script.Print("");
+  script.Print("");
+  script.Print("");
+  script.Print("********************************************");
+  script.Print("*==========================================*");
+  script.Print("                  CandyKat                  ");
+  script.Print("              the-candy-shop.co             ");
+  script.Print("*==========================================*");
+  script.Print("********************************************");
 
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
@@ -480,12 +486,12 @@ def WriteFullOTAPackage(input_zip, output_zip):
   script.Print("* \___)\_,_|_| |_|\__|  \/  || \__,_| ||   *");
   script.Print("*                       /                  *");
   script.Print("*==========================================*");
+  script.Print("********************************************");
 
   build = GetBuildProp("ro.build.date", OPTIONS.info_dict)
   script.Print("********************************************");
-  script.Print("**************  CANDYKAT ROM  **************");
-  script.Print("********************************************");
   script.Print("*   Compiled: %s"%(build));
+  script.Print("********************************************");
 
   device = GetBuildProp("ro.product.device", OPTIONS.info_dict)
   model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
