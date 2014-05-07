@@ -34,7 +34,7 @@ except:
     device = product
 
 if not depsonly:
-    print "Device %s not found. Attempting to retrieve device repository from CandyKat Github (http://github.com/CandyKat)." % device
+    print "Device %s not found. Attempting to retrieve device repository from SlimRoms Github (http://github.com/SlimRoms)." % device
 
 repositories = []
 
@@ -80,7 +80,7 @@ def indent(elem, level=0):
 
 def get_from_manifest(devicename):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/candykat_manifest.xml")
+        lm = ElementTree.parse(".repo/local_manifests/slim_manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -104,7 +104,7 @@ def get_from_manifest(devicename):
 
 def is_in_manifest(projectname, branch):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/candykat_manifest.xml")
+        lm = ElementTree.parse(".repo/local_manifests/slim_manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -117,7 +117,7 @@ def is_in_manifest(projectname, branch):
 
 def add_to_manifest_dependencies(repositories):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/candykat_manifest.xml")
+        lm = ElementTree.parse(".repo/local_manifests/slim_manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -131,7 +131,7 @@ def add_to_manifest_dependencies(repositories):
                 print 'Updating dependency %s' % (repo_name)
                 existing_project.set('name', repository['repository'])
             if existing_project.attrib['revision'] == repository['branch']:
-                print 'CandyKat/%s already exists' % (repo_name)
+                print 'SlimRoms/%s already exists' % (repo_name)
             else:
                 print 'updating branch for %s to %s' % (repo_name, repository['branch'])
                 existing_project.set('revision', repository['branch'])
@@ -150,13 +150,13 @@ def add_to_manifest_dependencies(repositories):
     raw_xml = ElementTree.tostring(lm)
     raw_xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + raw_xml
 
-    f = open('.repo/local_manifests/candykat_manifest.xml', 'w')
+    f = open('.repo/local_manifests/slim_manifest.xml', 'w')
     f.write(raw_xml)
     f.close()
 
 def add_to_manifest(repositories):
     try:
-        lm = ElementTree.parse(".repo/local_manifests/candykat_manifest.xml")
+        lm = ElementTree.parse(".repo/local_manifests/slim_manifest.xml")
         lm = lm.getroot()
     except:
         lm = ElementTree.Element("manifest")
@@ -167,15 +167,15 @@ def add_to_manifest(repositories):
         existing_project = exists_in_tree_device(lm, repo_name)
         if existing_project != None:
             if existing_project.attrib['revision'] == repository['branch']:
-                print 'CandyKat/%s already exists' % (repo_name)
+                print 'SlimRoms/%s already exists' % (repo_name)
             else:
-                print 'updating branch for CandyKat/%s to %s' % (repo_name, repository['branch'])
+                print 'updating branch for SlimRoms/%s to %s' % (repo_name, repository['branch'])
                 existing_project.set('revision', repository['branch'])
             continue
 
-        print 'Adding dependency: CandyKat/%s -> %s' % (repo_name, repo_target)
+        print 'Adding dependency: SlimRoms/%s -> %s' % (repo_name, repo_target)
         project = ElementTree.Element("project", attrib = { "path": repo_target,
-            "remote": "github", "name": "CandyKat/%s" % repo_name, "revision": "kk4.4" })
+            "remote": "github", "name": "SlimRoms/%s" % repo_name, "revision": "kk4.4" })
 
         if 'branch' in repository:
             project.set('revision', repository['branch'])
@@ -186,13 +186,13 @@ def add_to_manifest(repositories):
     raw_xml = ElementTree.tostring(lm)
     raw_xml = '<?xml version="1.0" encoding="UTF-8"?>\n' + raw_xml
 
-    f = open('.repo/local_manifests/candykat_manifest.xml', 'w')
+    f = open('.repo/local_manifests/slim_manifest.xml', 'w')
     f.write(raw_xml)
     f.close()
 
 def fetch_dependencies(repo_path):
     print 'Looking for dependencies'
-    dependencies_path = repo_path + '/candykat.dependencies'
+    dependencies_path = repo_path + '/slim.dependencies'
     syncable_repos = []
 
     if os.path.exists(dependencies_path):
@@ -245,4 +245,4 @@ else:
             print "Done"
             sys.exit()
 
-print "Repository for %s not found in the CandyKat Github repository list. If this is in error, you may need to manually add it to .repo/local_manifests/candykat_manifest.xml" % device
+print "Repository for %s not found in the SlimRoms Github repository list. If this is in error, you may need to manually add it to .repo/local_manifests/slim_manifest.xml" % device

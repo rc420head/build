@@ -61,12 +61,12 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^candykat_") ; then
-       CANDYKAT_BUILD=$(echo -n $1 | sed -e 's/^candykat_//g')
+    if (echo -n $1 | grep -q -e "^slim_") ; then
+       SLIM_BUILD=$(echo -n $1 | sed -e 's/^slim_//g')
     else
-       CANDYKAT_BUILD=
+       SLIM_BUILD=
     fi
-    export CANDYKAT_BUILD
+    export SLIM_BUILD
 
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
         TARGET_PRODUCT=$1 \
@@ -488,7 +488,7 @@ function breakfast()
     CM_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/candykat/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/slim/vendorsetup.sh 2> /dev/null`
         do
 echo "including $f"
             . $f
@@ -504,8 +504,8 @@ echo "z$target" | grep -q "-"
             # A buildtype was specified, assume a full device name
             lunch $target
         else
-            # This is probably just the CandyKat model name
-            lunch candykat_$target-userdebug
+            # This is probably just the SLIM model name
+            lunch slim_$target-userdebug
         fi
 fi
 return $?
