@@ -34,7 +34,7 @@ except:
     device = product
 
 if not depsonly:
-    print "Device %s not found. Attempting to retrieve device repository from CandyKat Github (http://github.com/CandyKat)." % device
+    print "Device %s not found. Attempting to retrieve device repository from SlimRoms Github (http://github.com/SlimRoms)." % device
 
 repositories = []
 
