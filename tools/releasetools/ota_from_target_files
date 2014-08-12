@@ -519,7 +519,6 @@ else if get_stage("%(bcb_dev)s", "stage") == "3/3" then
   script.Print("                  CandyKat                  ");
   script.Print("              the-candy-shop.co             ");
   script.Print("*==========================================*");
-  script.Print("********************************************");
 
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
