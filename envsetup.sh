@@ -24,8 +24,8 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - godir:     Go to the directory containing a file.
 - cmremote: Add git remote for matching LOS repository.
 - losremote: Add git remote for matching LOS repository.
-- crbremote: Add git remote for matching CarbonBeta repository.
-- crremote: Add gerrit remote for matching Carbon repository.
+- crbremote: Add git remote for matching AquariOSBeta repository.
+- crremote: Add gerrit remote for matching AquariOS repository.
 - mka:      Builds using SCHED_BATCH on all processors
 - repolastsync: Prints date and time of last repo sync.
 - repopick: Utility to fetch changes from Gerrit.
@@ -139,13 +139,13 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^carbon_") ; then
-        CARBON_BUILD=$(echo -n $1 | sed -e 's/^carbon_//g')
-        export BUILD_NUMBER=$((date +%s%N ; echo $CARBON_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
+    if (echo -n $1 | grep -q -e "^aquarios_") ; then
+        AQUARIOS_BUILD=$(echo -n $1 | sed -e 's/^aquarios_//g')
+        export BUILD_NUMBER=$((date +%s%N ; echo $AQUARIOS_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
     else
-        CARBON_BUILD=
+        AQUARIOS_BUILD=
     fi
-    export CARBON_BUILD
+    export AQUARIOS_BUILD
 
         TARGET_PRODUCT=$1 \
         TARGET_BUILD_VARIANT= \
@@ -206,7 +206,7 @@ function crbremote()
     fi
     PROJECT=`pwd -P | sed s#$ANDROID_BUILD_TOP/##g`
     PFX="android_$(echo $PROJECT | sed 's/\//_/g')"
-    git remote add crb git@github.com:CarbonBeta/$PFX
+    git remote add crb git@github.com:AquariOSBeta/$PFX
     echo "Remote 'crb' created"
 }
 
@@ -224,12 +224,12 @@ function crremote()
         echo Unable to set up the git remote, are you in the root of the repo?
         return 0
     fi
-    CRUSER=`git config --get review.review.carbonrom.org.username`
+    CRUSER=`git config --get review.review.aquarios.org.username`
     if [ -z "$CRUSER" ]
     then
-        git remote add crremote ssh://review.carbonrom.org:29418/$GERRIT_REMOTE
+        git remote add crremote ssh://review.aquarios.org:29418/$GERRIT_REMOTE
     else
-        git remote add crremote ssh://$CRUSER@review.carbonrom.org:29418/$GERRIT_REMOTE
+        git remote add crremote ssh://$CRUSER@review.aquarios.org:29418/$GERRIT_REMOTE
     fi
     echo You can now push to "crremote".
  }
@@ -1861,7 +1861,7 @@ unset f
 
 # Add completions
 check_bash_version && {
-    dirs="sdk/bash_completion vendor/carbon/bash_completion"
+    dirs="sdk/bash_completion vendor/aquarios/bash_completion"
     for dir in $dirs; do
     if [ -d ${dir} ]; then
         for f in `/bin/ls ${dir}/[a-z]*.bash 2> /dev/null`; do

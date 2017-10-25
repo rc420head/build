@@ -63,7 +63,7 @@ if [ -n "$BUILD_THUMBPRINT" ] ; then
 fi
 echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
 
-# Carbon properties
-echo "ro.carbon.device=$CARBON_DEVICE"
+# AquariOS properties
+echo "ro.aquarios.device=$AQUARIOS_DEVICE"
 
 echo "# end build properties"

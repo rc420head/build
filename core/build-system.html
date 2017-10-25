@@ -780,7 +780,7 @@ after it's been linked.  You might have to go through some contortions
 to get variables right because of early or late variable evaluation:</p>
 <p><code>module := $(HOST_OUT_EXECUTABLES)/$(LOCAL_MODULE)<br/>
 LOCAL_POST_PROCESS_COMMAND := /Developer/Tools/Rez -d __DARWIN__ -t APPL\<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-d __WXMAC__ -o $(module) Carbon.r
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-d __WXMAC__ -o $(module) AquariOS.r
 </code></p>
 
 <h4>LOCAL_PREBUILT_EXECUTABLES</h4>

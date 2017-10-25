@@ -550,7 +550,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("             .:okKNWWWNKdl'  '          ");
   script.Print("                 ''...`',  +'           ");
   script.Print("                                        ");
-  script.Print("                carbonrom.org           ");
+  script.Print("                aquarios.org           ");
 
   system_progress = 0.75
 
@@ -602,7 +602,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.WriteRawImage(bootpartition, "boot.img")
 
   script.ShowProgress(0.1, 0)
-  script.Print("Enjoy CarbonROM!");
+  script.Print("Enjoy AquariOS!");
   device_specific.FullOTA_InstallEnd()
 
   if OPTIONS.extra_script is not None:
