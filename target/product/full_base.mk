@@ -23,16 +23,6 @@ PRODUCT_PACKAGES := \
     libfwdlockengine \
     WAPPushManager
 
-PRODUCT_PACKAGES += \
-    Galaxy4 \
-    HoloSpiralWallpaper \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    MagicSmokeWallpapers \
-    NoiseField \
-    PhaseBeam \
-    PhotoTable
-
 # Bluetooth:
 #   audio.a2dp.default is a system module. Generic system image includes
 #   audio.a2dp.default to support A2DP if board has the capability.
@@ -46,11 +36,6 @@ PRODUCT_PACKAGES += \
 #   Android O.
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
-
-# Additional settings used in all AOSP builds
-PRODUCT_PROPERTY_OVERRIDES := \
-    ro.config.ringtone=Ring_Synth_04.ogg \
-    ro.config.notification_sound=pixiedust.ogg
 
 # Put en_US first in the list, so make it default.
 PRODUCT_LOCALES := en_US

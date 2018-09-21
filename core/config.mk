@@ -230,7 +230,7 @@ $(call project-set-path-variant,ril,TARGET_RIL_VARIANT,hardware/ril)
 
 -include vendor/extra/BoardConfigExtra.mk
 ifneq ($(LINEAGE_BUILD),)
-include vendor/lineage/config/BoardConfigLINEAGE.mk
+include vendor/lineage/config/BoardConfigLineage.mk
 endif
 
 # The build system exposes several variables for where to find the kernel
@@ -1154,16 +1154,10 @@ endif
 ifneq ($(LINEAGE_BUILD),)
 ## We need to be sure the global selinux policies are included
 ## last, to avoid accidental resetting by device configs
-#$(eval include device/lineage/sepolicy/common/sepolicy.mk)
+$(eval include device/lineage/sepolicy/common/sepolicy.mk)
 endif
 
 # Include any vendor specific config.mk file
 -include vendor/*/build/core/config.mk
-
-# Rules for QCOM targets
--include $(TOPDIR)vendor/lineage/build/core/qcom_target.mk
-
-# Rules for MTK targets
--include $(TOPDIR)vendor/lineage/build/core/mtk_target.mk
 
 include $(BUILD_SYSTEM)/dumpvar.mk

@@ -768,8 +768,8 @@ def WriteFullOTAPackage(input_zip, output_file):
   #ts_text = target_info.GetBuildProp("ro.build.date")
   #script.AssertOlderBuild(ts, ts_text)
 
-  #target_info.WriteDeviceAssertions(script, OPTIONS.oem_no_mount)
-  #device_specific.FullOTA_Assertions()
+  target_info.WriteDeviceAssertions(script, OPTIONS.oem_no_mount)
+  device_specific.FullOTA_Assertions()
 
   # Two-step package strategy (in chronological order, which is *not*
   # the order in which the generated script has things):
@@ -835,19 +835,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   system_progress = 0.75
 
-  script.Print("**************************************************");
-  script.Print(" ____    ________   _____   ____    ____          ");
-  script.Print("/\\  _`\\ /\\_____  \\ /\\  __`\\/\\  _`\\ /\\  _`\\         ");
-  script.Print("\\ \\ \\L\\_\\/____//'/'\\ \\ \\/\\ \\ \\,\\L\\_\\ \\ \\L\\\\");
-  script.Print(" \\ \\ \\L_L    //'/'  \\ \\ \\ \\ \\/_\\__ \\ \\ ,__/       ");
-  script.Print("  \\ \\ \\/, \\ //'/'___ \\ \\ \\_\\ \\/\\ \\L\\ \\ \\ \\/   ");
-  script.Print("   \\ \\____/ /\\_______\\\\ \\_____\\ `\\____\\ \\_\\       ");
-  script.Print("    \\/___/  \\/_______/ \\/_____/\\/_____/\\/_/   ");
-  script.Print("                                                   ");
-  script.Print("                   AOSP Pie                        ");
-  script.Print("          A Ground Zero Roms Project               ");
-  script.Print("***************************************************");
-
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
   if HasVendorPartition(input_zip):
@@ -880,7 +867,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     vendor_diff = common.BlockDifference("vendor", vendor_tgt)
     vendor_diff.WriteScript(script, output_zip)
 
-  # AddCompatibilityArchiveIfTrebleEnabled(input_zip, output_zip, target_info)
+  AddCompatibilityArchiveIfTrebleEnabled(input_zip, output_zip, target_info)
 
   common.CheckSize(boot_img.data, "boot.img", target_info)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
