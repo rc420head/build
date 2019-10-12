@@ -6,7 +6,7 @@
 # INS: Module "Install:" output color (cyan for ics)
 
 ifneq ($(BUILD_WITH_COLORS),0)
-    include $(TOP_DIR)build/core/colors.mk
+    include $(TOP_DIR)vendor/aquarios/build/core/colors.mk
 endif
 
 # HACK: clear LOCAL_PATH from including last build target before calling
@@ -424,7 +424,7 @@ endif
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 	        TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
 	        TARGET_DEVICE="$(TARGET_DEVICE)" \
-	        GZOSP_DEVICE="$(TARGET_DEVICE)" \
+	        AQUARIOS_DEVICE="$(TARGET_DEVICE)" \
 	        PRODUCT_NAME="$(TARGET_PRODUCT)" \
 	        PRODUCT_BRAND="$(PRODUCT_BRAND)" \
 	        PRODUCT_DEFAULT_LOCALE="$(call get-default-product-locale,$(PRODUCT_LOCALES))" \
@@ -4326,25 +4326,65 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	@echo "Package OTA: $@"
 	$(call build-ota-package-target,$@,-k $(KEY_CERT_PAIR) --output_metadata_path $(INTERNAL_OTA_METADATA))
 
-GZOSP_TARGET_PACKAGE := $(PRODUCT_OUT)/$(GZOSP_VERSION).zip
+AQUARIOS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(AQUARIOS_VERSION).zip
 
-.PHONY: otapackage gzosp
+.PHONY: otapackage aquarios bacon
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
-gzosp: otapackage
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(GZOSP_TARGET_PACKAGE)
-	$(hide) $(MD5SUM) $(GZOSP_TARGET_PACKAGE) > $(GZOSP_TARGET_PACKAGE).md5sum
-	@echo -e ${CL_RED}""${CL_RED}
-	@echo -e ${CL_RED}"    ▄██████▄   ▄███████▄   ▄██████▄     ▄████████    ▄███████▄ "${CL_RED}
-	@echo -e ${CL_RED}"   ███    ███ ██▀     ▄██ ███    ███   ███    ███   ███    ███ "${CL_RED}
-	@echo -e ${CL_RED}"   ███    █▀        ▄███▀ ███    ███   ███    █▀    ███    ███ "${CL_RED}
-	@echo -e ${CL_RED}"  ▄███         ▀█▀▄███▀▄▄ ███    ███   ███          ███    ███ "${CL_RED}
-	@echo -e ${CL_RED}" ▀▀███ ████▄    ▄███▀   ▀ ███    ███ ▀███████████ ▀█████████▀ "${CL_RED}
-	@echo -e ${CL_RED}"   ███    ███ ▄███▀       ███    ███          ███   ███ "${CL_RED}
-	@echo -e ${CL_RED}"   ███    ███ ███▄     ▄█ ███    ███    ▄█    ███   ███ "${CL_RED}
-	@echo -e ${CL_RED}"   ████████▀   ▀████████▀  ▀██████▀   ▄████████▀   ▄████▀ "${CL_RED}
-	@echo -e ${CL_RED}"                           A Ground Zero Roms "${CL_RED}
-	@echo -e ${CL_RED}"                                Project      "${CL_RED}
-	@echo -e "Package complete: $(GZOSP_TARGET_PACKAGE)"
+aquarios: bacon
+bacon: otapackage
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(AQUARIOS_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(AQUARIOS_TARGET_PACKAGE) > $(AQUARIOS_TARGET_PACKAGE).md5sum
+	@echo -e ""
+	@echo -e ""
+	@echo -e ""
+	@echo -e ${5fffff}"	                                   oo                          "${CL_RST}
+	@echo -e ${5fffff}"	                                oooo                           "${CL_RST}
+	@echo -e ${5fffff}"	                          oooooooooooo                         "${CL_RST}
+	@echo -e ${5fffff}"	                          oooooooooooooooooo                   "${CL_RST}
+	@echo -e ${5fffff}"	                      oooooooooooooooooooooo                   "${CL_RST}
+	@echo -e ${5fffff}"	                      ooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${5fffd7}"	                     oooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${5fffd7}"	                   ooooooooooooooooooooooooooo                 "${CL_RST}
+	@echo -e ${5fffd7}"	                      ooooooooooooooooooooooooo                "${CL_RST}
+	@echo -e ${5fffd7}"	                    ooooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${00d7d7}"	                   oooooooooooooooooooooooooooooooo            "${CL_RST}
+	@echo -e ${00d7d7}"	                 oooooooooooooooooo ooooooooooooooooo          "${CL_RST}
+	@echo -e ${00d7d7}"	                 ooooooooooooooooooo  ooo  oooooooooooo        "${CL_RST}
+	@echo -e ${00d7d7}"	                 oooooooooooooooooooooo          ooooo         "${CL_RST}
+	@echo -e ${00d7d7}"	                 ooooooooooooooooooooooooo                     "${CL_RST}
+	@echo -e ${00d7d7}"	                  ooooooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${00d7d7}"	                   oooooooooooooooooooooooooooo                "${CL_RST}
+	@echo -e ${00d7d7}"	                    oooooooooooooooooooooooooooo               "${CL_RST}
+	@echo -e ${5fd7d7}"	                   o  ooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${5fd7d7}"	         oo      oooo   oooooooooooooooooooooooooo             "${CL_RST}
+	@echo -e ${5fd7d7}"	          ooooooooooo   oooooooooooooooooooooooooo             "${CL_RST}
+	@echo -e ${5fd7d7}"	           ooooooooooooooooooooooooooooooooooooooo             "${CL_RST}
+	@echo -e ${5fd7d7}"	           oooooooooooooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${5fafaf}"	       ooooooooooooooooooooooooooooooooooooooooo               "${CL_RST}
+	@echo -e ${5fafaf}"	           oooooooooooooooooooooooooooooooooooo                "${CL_RST}
+	@echo -e ${5fafaf}"	          ooooooooooooooooooooooooooooooooooo                  "${CL_RST}
+	@echo -e ${5fafaf}"	       ooooooooooooooooooooooooooooooooooo                     "${CL_RST}
+	@echo -e ${5f87af}"	            ooooooooooooooooooooooooooo                        "${CL_RST}
+	@echo -e ${5f87af}"	          oooooooooooooooooooooooooo                           "${CL_RST}
+	@echo -e ${5f87af}"	                 ooooooooooooooo                               "${CL_RST}
+	@echo -e ${5f87af}"	                ooooooooooooooo                                "${CL_RST}
+	@echo -e ${5f87af}"	                oooooooooooooo                                 "${CL_RST}
+	@echo -e ${0087af}"	                oooooooooooooo         ooooooooo               "${CL_RST}
+	@echo -e ${0087af}"	                oooooooooooooo       ooooooooooooo             "${CL_RST}
+	@echo -e ${0087af}"	                ooooooooooooooo     ooooo  ooooooo             "${CL_RST}
+	@echo -e ${0087af}"	                 oooooooooooooo     ooo      oooooo            "${CL_RST}
+	@echo -e ${0087af}"	                  oooooooooooooo    oo       oooooo            "${CL_RST}
+	@echo -e ${0087af}"	                    ooooooooooooooo  o     ooooooo             "${CL_RST}
+	@echo -e ${0087af}"	                     oooooooooooooooooooooooooooo              "${CL_RST}
+	@echo -e ${005f87}"	                        oooooooooooooooooooooooo               "${CL_RST}
+	@echo -e ${005f87}"	                           oooooooooooooooooooo                "${CL_RST}
+	@echo -e ${005f87}"	                                ooooooooooo                    "${CL_RST}
+	@echo -e " "
+	@echo -e " "
+	@echo -e ${ff875f}"			  Welcome to the age of AquariOS"${CL_RST}
+	@echo -e " "
+	@echo -e ${CL_BWT}"Package Complete: $(AQUARIOS_TARGET_PACKAGE)"${CL_RST}
+	@echo -e "SIZE:"${CL_CYN}" `ls -la --si $(AQUARIOS_TARGET_PACKAGE) | cut -d ' ' -f 5`"${CL_RST}
 
 ifeq ($(BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE),true)
 name := $(TARGET_PRODUCT)
