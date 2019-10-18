@@ -115,6 +115,9 @@ ifdef TARGET_DEVICE_DIR
   .KATI_READONLY := TARGET_DEVICE_DIR
 endif
 
+ONE_SHOT_MAKEFILE :=
+.KATI_READONLY := ONE_SHOT_MAKEFILE
+
 # Set up efficient math functions which are used in make.
 # Here since this file is included by envsetup as well as during build.
 include $(BUILD_SYSTEM_COMMON)/math.mk
@@ -447,9 +450,6 @@ endif
 ifneq ($(filter true,$(SOONG_ALLOW_MISSING_DEPENDENCIES)),)
 ALLOW_MISSING_DEPENDENCIES := true
 endif
-ifneq ($(ONE_SHOT_MAKEFILE),)
-ALLOW_MISSING_DEPENDENCIES := true
-endif
 .KATI_READONLY := ALLOW_MISSING_DEPENDENCIES
 
 TARGET_BUILD_APPS_USE_PREBUILT_SDK :=
@@ -583,7 +583,6 @@ MKF2FSUSERIMG := $(HOST_OUT_EXECUTABLES)/mkf2fsuserimg.sh
 SIMG2IMG := $(HOST_OUT_EXECUTABLES)/simg2img$(HOST_EXECUTABLE_SUFFIX)
 IMG2SIMG := $(HOST_OUT_EXECUTABLES)/img2simg$(HOST_EXECUTABLE_SUFFIX)
 E2FSCK := $(HOST_OUT_EXECUTABLES)/e2fsck$(HOST_EXECUTABLE_SUFFIX)
-MKTARBALL := build/make/tools/mktarball.sh
 TUNE2FS := $(HOST_OUT_EXECUTABLES)/tune2fs$(HOST_EXECUTABLE_SUFFIX)
 JARJAR := $(HOST_OUT_JAVA_LIBRARIES)/jarjar.jar
 DATA_BINDING_COMPILER := $(HOST_OUT_JAVA_LIBRARIES)/databinding-compiler.jar
@@ -1156,8 +1155,7 @@ endef
 # in the source tree.
 dont_bother_goals := out \
     snod systemimage-nodeps \
-    stnod systemtarball-nodeps \
-    userdataimage-nodeps userdatatarball-nodeps \
+    userdataimage-nodeps \
     cacheimage-nodeps \
     bptimage-nodeps \
     vnod vendorimage-nodeps \
